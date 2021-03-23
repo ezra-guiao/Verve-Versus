@@ -1,140 +1,52 @@
-using System;
-
-namespace Versus_Verve
-{
-    public class mainclass
-    {
-        static void playerAction(string player)
-        {
-            string Action = Console.ReadLine();
-            Console.WriteLine(player);
-            if (Action == "1")
+            if (temp >= inventory.Count)
             {
-                if (player == "player1")
-                {
-
-                }
-                else if (player == "player2")
-                {
-
-                }
+                Console.WriteLine("Invalid Input please try again");
+                Console.WriteLine("\nChoose your Action\n│1: Atk Artifice│ │2: Atk Gauntlet│ │3: HexBow│ │4: Hexylene Caliver Blaster│\n│5: Inventory│ │6: Pass Turn│ │7: Show more info│\n");
+                PlayerAction(player, inventory);
             }
-            else if (Action == "2")
+            else if (inventory[temp] == "Basic Health Pot (Item)")
             {
-                if (player == "player1")
-                {
-
-                }
-                else if (player == "player2")
-                {
-
-                }
+                Console.WriteLine("{0} has healed for 30HP", player);
             }
-            else if (Action == "3")
+            else if (inventory[temp] == "Guardian (Item)")
             {
-                if (player == "player1")
-                {
-
-                }
-                else if (player == "player2")
-                {
-
-                }
+                Console.WriteLine("{0} can only take a maximum of 10dmg per turn for 3 turns", player);
             }
-            else if (Action == "4")
+            else if (inventory[temp] == "Regenerative (Item)")
             {
-                if (player == "player1")
-                {
-
-                }
-                else if (player == "player2")
-                {
-
-                }
+                Console.WriteLine("{0} will heal 10 HP per turn for 5 turns", player);
             }
-            else if (Action == "5")
+            else if (inventory[temp] == "Elusive Pot (Item)")
             {
-                if (player == "player1")
-                {
-
-                }
-                else if (player == "player2")
-                {
-
-                }
+                Console.WriteLine("{0} has 33% dodge rate for 5 turns", player);
+            }
+            else if (inventory[temp] == "Windmill (Building)")
+            {
+                Console.WriteLine("{0}'s Windmill prodcues additional 3 verve per turn", player);
+            }
+            else if (inventory[temp] == "Enhanced Hexbow (Upgrade)")
+            {
+                Console.WriteLine("Gives {0}'s weapon 33% crit chance, also reduce it's drawback damage", player);
+            }
+            else if (inventory[temp] == "Taxation (Item)")
+            {
+                Console.WriteLine("{0} steals half of the opponent’s verve", player);
+            }
+            else if (inventory[temp] == "Powerplant (Building)")
+            {
+                Console.WriteLine("{0}'s Powerplant prodcues additional 5 verve per turn, it can not be used", player);
+            }
+            else if (inventory[temp] == "Reactor (Building)")
+            {
+                Console.WriteLine("{0}'s Reactor produces additional 10 verve per turn, 20% chance per turn to destroy itself, dealing 25 dmg to both players", player);
+            }
+            else if (inventory[temp] == "Enhanced Hexlyene Caliver (Upgrade)")
+            {
+                Console.WriteLine("Gives {0}'s weapon a 20% chance of damaging the opponent for all his HP, can’t be dodged or shielded.", player);
+                Console.WriteLine("Upgrade is already in effect");
             }
             else
             {
-                Console.WriteLine("Invalid input, Please try again");
-                Console.WriteLine("\nChoose your action 1: use sword, 2: strong atk, 3: bow, 4: shield, 5: rest");
-                playerAction("player1");
+                Console.WriteLine("Invalid Input please try again");
+                PlayerAction(player, inventory);
             }
-        }
-
-        static void verveShop(string player)
-        {
-            string goShop = Console.ReadLine();
-            if (goShop == "1")
-            {
-                Console.WriteLine("===================");
-                Console.WriteLine("Welcome to the shop");
-
-            }
-            else if (goShop == "2")
-            {
-                return;
-            }
-            else
-            {
-                Console.WriteLine("Invalid input, Please try again");
-                Console.WriteLine("1: Go to Shop, 2: End turn");
-                verveShop("player1");
-            }
-        }
-        static void Main(string[] args)
-        {
-            //declaring variables
-            bool isGame = true;
-            int turnCounter = 0;
-            int p1Hp = 100;
-            int p2Hp = 100;
-            int p1Verve = 0;
-            int p2Verve = 0;
-
-            //main game loop
-            while (isGame)
-            {
-                if (p1Hp <= 0 || p2Hp <= 0)
-                {
-                    isGame = false;
-                }
-
-                if (turnCounter % 2 == 0)
-                {
-                    Console.WriteLine("\nPlayer 1's turn, what would u like to do");
-                    Console.WriteLine("You currently have {0} HP and {1} Verve", p1Hp, p1Verve);
-                    Console.WriteLine("\nChoose your action 1: use sword, 2: strong atk, 3: bow, 4: shield, 5: rest");
-                    playerAction("player1");
-                    Console.WriteLine("\nYou have {0} Verve remaining, would you like to buy something?", p1Verve);
-                    Console.WriteLine("1: Go to Shop, 2: End turn");
-                    verveShop("player1");
-                    p1Verve += 5;
-                    turnCounter += 1;
-
-                }
-                else
-                {
-                    Console.WriteLine("\nPlayer 2's turn, what would u like to do");
-                    Console.WriteLine("You currently have {0} HP and {1} Verve", p2Hp, p2Verve);
-                    Console.WriteLine("\nChoose your action 1: use sword, 2: strong atk, 3: bow, 4: shield, 5: rest");
-                    playerAction("player2");
-                    Console.WriteLine("\nYou have {0} Verve remaining, would you like to buy something?", p2Verve);
-                    Console.WriteLine("1: Go to Shop, 2: End turn");
-                    verveShop("player2");
-                    p2Verve += 5;
-                    turnCounter += 1;
-                }
-            }
-        }
-    }
-}
